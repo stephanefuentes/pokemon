@@ -1,0 +1,15 @@
+<div class="container">
+ 
+	<p> <img src='{{ asset('images/'~ pokemon.image ) }}' > {{ pokemon.name }} </p>  
+	<p>
+		HP : {{ pokemon.hp}} <br>
+		Force : {{ pokemon.power}} <br>
+		Defense : {{ pokemon.defense}} <br>
+		Vitesse : {{ pokemon.speed}} <br>
+
+		{% for type in pokemon.types %}
+		     <img src='{{ asset('images/'~ type.image ) }}' >
+		{% endfor %}
+	</p>
+
+</div>

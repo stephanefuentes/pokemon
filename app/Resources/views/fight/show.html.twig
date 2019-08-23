@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	
+
+
+	<div class="container">
+		<div class="row">
+			<h1>Combat</h1>
+			<div class="col-sm-1">
+			</div>
+			<div class="col-sm-5">
+			  <h1> Joueur 1 : {{ fight.user1.name }} </h1>
+
+			  {{ include('template/show_pokemon.html.twig', { 'pokemon': fight.pokemon1 }) }}
+			  
+
+			</div>
+
+			<div class="col-sm-5">
+			  <h1> Joueur 2 : {{ fight.user2.name }}</h1>
+
+			  {{ include('template/show_pokemon.html.twig', { 'pokemon': fight.pokemon2 }) }}
+
+			</div>
+		</div>
+			
+		<div class="row">
+			{% if not fight.isOver  %}
+				<div class="col-sm-6">
+					{% if app.session.get('user') != null and fight.user1.id == app.session.get('user').id %}
+						{% for attack in fight.pokemon1.attacks %}
+							
+							<div class="col-sm-6">
+								<form action='{{ path('play' , { 'id' : fight.id }) }}' method='POST'>
+								<input type="hidden" name="attack_id" value='{{ attack.id }}'>
+								<input type="hidden" name="user_id" value='{{ fight.user1.id }}'>
+								<button class="well" >
+									<p>
+										{{ attack.name }}<br >
+										Puissance : {{ attack.power }} <br >
+										<img src='{{ asset('images/'~ attack.type.image ) }}' >
+									</p>
+								</button>
+								</form>
+							</div>
+						{% endfor %}
+					{% endif %}
+				</div>
+			{% else %}
+				<div class="col-sm-6">
+					<div class="panel panel-default">
+						<div class="panel-heading">Vainqueur</div>
+				  		<div class="panel-body">
+				  			{{ fight.winner.name }}
+				  		</div>
+					  
+					</div>
+				</div>
+			{% endif %}
+			<div class="col-sm-6">
+				<div class="panel panel-default">
+					{% for turn in fight.turns|sort %}
+						<div class="panel-heading">Tour {{ loop.index }}</div>
+				  		<div class="panel-body">
+				  			{{ fight.pokemon1.name }} utilise {{ turn.attack1.name }} <br>
+				  			{{ fight.pokemon1.name }} HP : {{ turn.pokemon1Hp }} /  {{ fight.pokemon1.Hp }} <br>
+				  			{{ fight.pokemon2.name }} utilise {{ turn.attack2.name }} <br>
+				  			{{ fight.pokemon2.name }} HP : {{ turn.pokemon2Hp }} /  {{ fight.pokemon2.Hp }} <br>
+				  		</div>
+
+					{% endfor %}
+				  
+				</div>
+			</div>
+	
+		</div>
+	</div>
+
+    
+{% endblock %}

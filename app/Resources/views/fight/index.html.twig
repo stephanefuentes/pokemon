@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    
+    <div class="container">
+      <div class='row'>
+        <h1>Démarrer un combat</h1>
+      </div>
+      <div class='row'>
+        {{ form_start(form) }}
+        	<div class="col-sm-5">
+          		{{form_row(form.pokemon1)}}
+          	</div>
+          	<div class="col-sm-5">
+          		{{form_row(form.pokemon2)}}
+          	</div>
+ 
+        {{ form_end(form) }}
+      </div>
+      
+    </div>
+
+    <script>
+
+    	$("input[type=checkbox]").change(changeRandom);
+
+		function changeRandom() {
+			if($(this).is(':checked'))
+			{
+				$("#pokemon_pokemon2 input:radio").attr('disabled',true);
+			}
+			else
+			{
+				$("#pokemon_pokemon2 input:radio").attr('disabled',false);
+			}
+		}
+	</script>
+
+
+{% endblock %}

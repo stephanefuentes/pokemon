@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-10">
+      <h1> Types de pokemon </h1>
+
+
+      <table id="types">
+        <tr>
+           <th> </th>
+          {% for type in types %}
+             
+                <th> <img src='{{ asset('images/'~ type.image ) }}' > </th>
+            
+          {% endfor %}
+
+        </tr>
+
+        {% for type in types %}
+          <tr>
+            <td> <img src='{{ asset('images/'~ type.image ) }}' > </td>
+            {% for affinity in type.affinities %}
+            
+              {% if affinity.multiplier == 0 %}
+                <td class='grey'> {{ affinity.multiplier }} </td>
+              {% endif %}
+              {% if affinity.multiplier == 0.5 %}
+                <td class='red'> {{ affinity.multiplier }}</td>
+              {% endif %}
+              {% if affinity.multiplier == 2 %}
+                <td class='green'> {{ affinity.multiplier }} </td>
+              {% endif %}
+              {% if affinity.multiplier == 1 %}
+                <td> </td>
+              {% endif %}
+                
+            
+          {% endfor %}
+          </tr>
+        {% endfor %}
+     </table>
+
+    </div>
+  </div>
+</div>
+    
+    
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}

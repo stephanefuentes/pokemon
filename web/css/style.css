@@ -1,0 +1,43 @@
+#types .green
+{
+	background-color:green;
+}
+
+#types .red
+{
+	background-color:red;
+}
+
+#types .grey
+{
+	background-color:grey;
+}
+
+#types td
+{
+	width:30px;
+	height:30px;
+	color:white;
+	font-weight: bold;
+	text-align: center;
+}
+
+#types td, #types th
+{
+	border:1px solid grey;
+}
+
+body
+{
+	padding-bottom:10%;
+}
+
+.row input[type=radio] + label
+{
+	display:inline-block;
+}
+
+.row input[type=radio]
+{
+	display:block;
+}

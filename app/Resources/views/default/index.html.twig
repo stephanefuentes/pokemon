@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-10">
+      <h1> Liste des pokemons </h1>
+
+
+      <ul class="list-group">
+        {% for pokemon in pokemons %}
+            <li class="list-group-item">
+
+                <h4 class="panel-title" data-target="#{{ pokemon.name }}" data-toggle="collapse"> 
+                    {{ pokemon.name }} 
+                </h4>
+
+                <div id="{{ pokemon.name }}" class="panel-collapse collapse">
+                  {{ include('template/show_pokemon.html.twig', { 'pokemon': pokemon }) }}
+               </div>
+            </li>
+
+        {% endfor %}
+     </ul>
+
+    </div>
+  </div>
+</div>
+    
+    
+{% endblock %}

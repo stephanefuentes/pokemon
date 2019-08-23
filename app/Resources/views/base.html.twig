@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}" /></link>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+
+        <!-- navbar -->  
+       <nav class="navbar navbar-inverse">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="{{ path('home') }}">Pokemon Battle</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="{{ path('types') }}">Types de pokemon</a></li>
+                 <li>
+                    <a href="{{ path('show_user' , { 'id' : 2 } ) }}"> 
+                        Liste des combats contre l'ordinateur
+                    </a>
+                </li>
+                {% if app.session.get('user') %}
+                     <li> <a href="{{ path('create_fight') }}"> Démarrer un combat </a></li>
+                     
+                {% endif %}
+
+                {% if app.session.get('user') %}
+                    <li>
+                        <a href="{{ path('show_user' , { 'id' : app.session.get('user').id } ) }}"> 
+                            Bonjour {{ app.session.get('user').name }} 
+                        </a>
+                    </li>
+                    <li> <a href="{{ path('logout') }}"> Deconnexion </a></li>
+                {% else %}
+                    <li>
+                        <form  class="navbar-form navbar-left" action='{{ path('login') }}' method="POST">
+                            <div class="form-group">
+                                <label for="name"> Entrez un nom pour jouer </label>
+                                <input type="text" name="name" id="name">
+                            </div>
+                            <input type="submit" value="connexion">
+                        </form>
+                    </li>
+                {% endif %} 
+     
+            </ul>
+            
+           
+          </div>
+        </nav>
+
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
